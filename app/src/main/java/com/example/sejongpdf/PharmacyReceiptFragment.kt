@@ -66,10 +66,10 @@ class PharmacyReceiptFragment : Fragment() {
         view.findViewById<TextView>(R.id.medicationDaysTextView).text =
             pharmacyReceipt.medicationDays.toString()
         val saveButton = view.findViewById<Button>(R.id.pdfPrintButton)
-        saveButton.setOnClickListener {
-            val activity = activity as MainActivity
-            activity.saveViewAsPDF(view)
-        }
+//        saveButton.setOnClickListener {
+//            val activity = activity as MainActivity
+//            activity.saveViewAsPDF(view)
+//        }
 
     }
 

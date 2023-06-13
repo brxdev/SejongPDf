@@ -6,13 +6,18 @@ import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.widget.HorizontalScrollView
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -46,15 +51,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    fun saveViewAsPDF(view: View) {
+    fun saveViewAsPDF(scrollView: HorizontalScrollView) {
         checkStoragePermission()
+
+        val totalWidth = scrollView.getChildAt(0).width
+
+        val bitmap = Bitmap.createBitmap(totalWidth, scrollView.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val bgDrawable = scrollView.background
+        if (bgDrawable != null) {
+            bgDrawable.draw(canvas)
+        } else {
+            canvas.drawColor(Color.WHITE)
+        }
+        scrollView.draw(canvas)
+
         val pdfDocument = PdfDocument()
-
-        val pageInfo = PdfDocument.PageInfo.Builder(view.width, view.height, 1).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(totalWidth, scrollView.height, 1).create()
         val page = pdfDocument.startPage(pageInfo)
-
-        view.draw(page.canvas)
-
+        val paint = Paint()
+        page.canvas.drawBitmap(bitmap, 0f, 0f, paint)
         pdfDocument.finishPage(page)
 
         val resolver = contentResolver
