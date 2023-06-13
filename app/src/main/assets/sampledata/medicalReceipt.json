@@ -1,0 +1,170 @@
+{
+  "outpatient": true,
+  "inpatient": false,
+  "discharged": false,
+  "intermediate": false,
+  "patientRegistrationNumber": "P123456789",
+  "patientName": "홍길동",
+  "treatmentPeriod": {
+    "startDate": "2023-06-01",
+    "endDate": "2023-06-05",
+    "nightTreatment": false,
+    "holidayTreatment": false
+  },
+  "medicalSubject": "일반 의학",
+  "diagnosisRelatedGroupNumber": "DRG1234",
+  "roomPatientType": "일반",
+  "receiptNumber": "2023-06-001",
+  "items": {
+    "examinationFee": {
+      "covered": 80000,
+      "notCovered": 0,
+      "calculationDetails": "표준 진찰료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "hospitalizationFee": {
+      "covered": 0,
+      "notCovered": 1200000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 1200000
+    },
+    "mealExpenses": {
+      "covered": 50000,
+      "notCovered": 0,
+      "calculationDetails": "입원비에 포함",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "medicationAndDispensingFee": {
+      "covered": 60000,
+      "notCovered": 0,
+      "calculationDetails": "표준 약물 조제료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "procedureFee": {
+      "covered": 0,
+      "notCovered": 40000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 40000
+    },
+    "medicationCost": {
+      "covered": 20000,
+      "notCovered": 0,
+      "calculationDetails": "표준 약품 비용",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "injectionFee": {
+      "covered": 10000,
+      "notCovered": 0,
+      "calculationDetails": "표준 주사료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "treatmentSupplyCost": {
+      "covered": 0,
+      "notCovered": 5000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 5000
+    },
+    "rehabilitationAndPhysicalTherapyFee": {
+      "covered": 40000,
+      "notCovered": 0,
+      "calculationDetails": "표준 재활 및 물리치료료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "psychiatricTherapyFee": {
+      "covered": 0,
+      "notCovered": 60000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 60000
+    },
+    "bloodAndBloodProductFee": {
+      "covered": 30000,
+      "notCovered": 0,
+      "calculationDetails": "표준 혈액 및 혈액성분제 제료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "treatmentAndSurgicalFee": {
+      "covered": 0,
+      "notCovered": 200000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 200000
+    },
+    "testFee": {
+      "covered": 70000,
+      "notCovered": 0,
+      "calculationDetails": "표준 검사료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "imagingDiagnosisFee": {
+      "covered": 0,
+      "notCovered": 80000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 80000
+    },
+    "radiationTherapyFee": {
+      "covered": 90000,
+      "notCovered": 0,
+      "calculationDetails": "표준 방사선치료료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "dentureAndOrthodonticFee": {
+      "covered": 0,
+      "notCovered": 100000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 100000
+    },
+    "ctScanFee": {
+      "covered": 150000,
+      "notCovered": 0,
+      "calculationDetails": "표준 CT 진단료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "mriScanFee": {
+      "covered": 0,
+      "notCovered": 200000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 200000
+    },
+    "petScanFee": {
+      "covered": 250000,
+      "notCovered": 0,
+      "calculationDetails": "표준 PET 진단료",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 0
+    },
+    "ultrasoundScanFee": {
+      "covered": 0,
+      "notCovered": 50000,
+      "calculationDetails": "보험 적용 안됨",
+      "partialSelfPayment": 0,
+      "fullSelfPayment": 50000
+    }
+  },
+  "healthcareFacilityType": "병원",
+  "clinicOrHealthCenter": false,
+  "hospital": true,
+  "generalHospital": false,
+  "superGeneralHospital": false,
+  "businessRegistrationNumber": "1234567890",
+  "company": "ABC 병원",
+  "phoneNumber": "123-456-7890",
+  "businessLocation": "국가, 도시, 주소",
+  "representative": "홍길동 의사"
+}
