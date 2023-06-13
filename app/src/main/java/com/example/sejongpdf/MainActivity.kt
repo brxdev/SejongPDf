@@ -1,18 +1,15 @@
 package com.example.sejongpdf
 
 import android.content.ContentValues
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.pdf.PdfDocument
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import java.io.File
-import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
     companion object {
