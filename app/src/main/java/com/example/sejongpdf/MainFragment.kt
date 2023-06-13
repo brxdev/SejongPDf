@@ -47,6 +47,7 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,7 +68,7 @@ class MainFragment : Fragment() {
         val saveButton = view.findViewById<Button>(R.id.pdfPrintButton)
         saveButton.setOnClickListener {
             val activity = activity as MainActivity
-            activity.saveViewAsPDF(view, "myrealtest.pdf")
+            activity.saveViewAsPDF(view)
         }
 
     }

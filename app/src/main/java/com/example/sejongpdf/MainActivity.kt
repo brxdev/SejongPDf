@@ -24,6 +24,9 @@ import androidx.fragment.app.commit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    fun saveViewAsPDF(view: View, fileName: String) {
+    fun saveViewAsPDF(view: View) {
         checkStoragePermission()
         val pdfDocument = PdfDocument()
 
@@ -55,6 +58,10 @@ class MainActivity : AppCompatActivity() {
         pdfDocument.finishPage(page)
 
         val resolver = contentResolver
+
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val fileName = "약제비_$timeStamp.pdf"
+
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
             put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
