@@ -1,15 +1,29 @@
 package com.example.sejongpdf
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -28,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun saveViewAsPDF(view: View, fileName: String) {
+        checkStoragePermission()
         val pdfDocument = PdfDocument()
 
         val pageInfo = PdfDocument.PageInfo.Builder(view.width, view.height, 1).create()
@@ -51,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 pdfDocument.writeTo(outputStream!!)
                 outputStream.close()
                 Toast.makeText(this, "PDF Saved!", Toast.LENGTH_SHORT).show()
+                showNotification("제목", "PDF가 저장되었습니다.")
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -58,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         pdfDocument.close()
     }
+
     // Catch the result of the permission request
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -81,5 +99,67 @@ class MainActivity : AppCompatActivity() {
                 // Ignore all other requests.
             }
         }
+    }
+
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private fun checkStoragePermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun showNotification(title: String, message: String) {
+        coroutineScope.launch {
+            createNotificationChannel()
+            val notification = buildNotification(title, message)
+            if (ActivityCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this@MainActivity,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1
+                )
+                return@launch
+            }
+            NotificationManagerCompat.from(this@MainActivity).notify(1, notification.build())
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "channel_id",
+                "Channel Name",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Channel Description"
+                enableLights(true)
+                lightColor = Color.RED
+            }
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun buildNotification(title: String, message: String): NotificationCompat.Builder {
+        val builder = NotificationCompat.Builder(this, "channel_id")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        return builder
     }
 }
