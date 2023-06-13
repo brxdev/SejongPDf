@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add(R.id.fragment_container_view, MainFragment.newInstance("hi", "bruce"))
+                add(R.id.fragment_container_view, PharmacyReceiptFragment.newInstance("hi", "bruce"))
             }
         }
     }

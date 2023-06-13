@@ -17,7 +17,7 @@ import java.io.IOException
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class MainFragment : Fragment() {
+class PharmacyReceiptFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -77,7 +77,7 @@ class MainFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
+            PharmacyReceiptFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

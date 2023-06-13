@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context=".MainFragment">
+    tools:context=".PharmacyReceiptFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/receiptInfoLinearLayout"
