@@ -6,13 +6,13 @@ import java.time.LocalDateTime
 data class PharmacyReceipt(
     @SerializedName("receiptNumber") val receiptNumber: String,
     @SerializedName("patientName") val patientName: String,
-    @SerializedName("formulationDate") val formulationDate: LocalDateTime,
+    @SerializedName("formulationDate") val formulationDate: String,
     @SerializedName("medicationDays") val medicationDays: Int,
     @SerializedName("medicines") val medicines: List<Medicine>,
     @SerializedName("costStructure") val costStructure: List<CostItem>,
     @SerializedName("businessNumber") val businessNumber: String,
     @SerializedName("businessName") val businessName: String,
-    @SerializedName("purchaseDate") val purchaseDate: LocalDateTime,
+    @SerializedName("purchaseDate") val purchaseDate: String,
     @SerializedName("totalAmount") val totalAmount: Double
 )
 

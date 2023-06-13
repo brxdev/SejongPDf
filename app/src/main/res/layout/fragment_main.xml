@@ -329,27 +329,37 @@
         app:layout_constraintTop_toBottomOf="@+id/pharmacyInfoLinearLayout" />
 
     <LinearLayout
+        android:id="@+id/totalCostLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
         <TextView
             android:id="@+id/totalCostTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="총 금액"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/totalCostValueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10000"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/pdfPrintButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pdf출력"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalCostLinearLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

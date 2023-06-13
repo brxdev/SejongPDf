@@ -1,12 +1,18 @@
 package com.example.sejongpdf
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.sejongpdf.models.PharmacyReceipt
 import com.google.gson.Gson
+import java.io.IOException
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -14,52 +20,6 @@ private const val ARG_PARAM2 = "param2"
 class MainFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
-//
-//    val jsonString = """
-//        {
-//            "receiptNumber": "1234567890",
-//            "patientName": "홍길동",
-//            "formulationDate": "2021-09-01T00:00:00",
-//            "medicationDays": 30,
-//            "medicines": [
-//                {
-//                    "name": "약품1",
-//                    "price": 1000,
-//                    "dosage": "1회 1정",
-//                    "administrationTimes": 3,
-//                    "administrationDays": 30
-//                },
-//                {
-//                    "name": "약품2",
-//                    "price": 2000,
-//                    "dosage": "1회 1정",
-//                    "administrationTimes": 3,
-//                    "administrationDays": 30
-//                }
-//            ],
-//            "costStructure": [
-//                {
-//                    "name": "약값",
-//                    "amount": 3000
-//                },
-//                {
-//                    "name": "조제료",
-//                    "amount": 1000
-//                },
-//                {
-//                    "name": "기타",
-//                    "amount": 1000
-//                }
-//            ],
-//            "businessNumber": "123-45-67890",
-//            "businessName": "약국명",
-//            "purchaseDate": "2021-09-01T00:00:00",
-//            "totalAmount": 5000
-//        }
-//    """.trimIndent()
-//
-//    private val gson = Gson()
-//    val receipt: PharmacyReceipt = gson.fromJson(jsonString, PharmacyReceipt::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +27,17 @@ class MainFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    private fun getJsonDataFromAsset(context: Context, fileName: String): String {
+        val jsonString: String
+        try {
+            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return ""
+        }
+        return jsonString
     }
 
     override fun onCreateView(
@@ -78,6 +49,26 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val jsonFileString =
+            getJsonDataFromAsset(requireContext(), "sampledata/medicineReceipt.json")
+
+        val gson = Gson();
+
+        val pharmacyReceipt = gson.fromJson(jsonFileString, PharmacyReceipt::class.java)
+
+
+        view.findViewById<TextView>(R.id.receiptNumberTextView).text = pharmacyReceipt.receiptNumber
+        view.findViewById<TextView>(R.id.patientNameTextView).text = pharmacyReceipt.patientName
+        view.findViewById<TextView>(R.id.formulationDateTextView).text =
+            pharmacyReceipt.formulationDate
+        view.findViewById<TextView>(R.id.medicationDaysTextView).text =
+            pharmacyReceipt.medicationDays.toString()
+        val saveButton = view.findViewById<Button>(R.id.pdfPrintButton)
+        saveButton.setOnClickListener {
+            val activity = activity as MainActivity
+            activity.saveViewAsPDF(view, "myrealtest.pdf")
+        }
 
     }
 

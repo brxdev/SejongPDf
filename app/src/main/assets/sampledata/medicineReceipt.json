@@ -1,0 +1,40 @@
+{
+  "receiptNumber": "9999999999999",
+  "patientName": "레이디 가가",
+  "formulationDate": "2023년 6월 1일",
+  "medicationDays": 30,
+  "medicines": [
+    {
+      "name": "약품1",
+      "price": 1000,
+      "dosage": "1회 1정",
+      "administrationTimes": 3,
+      "administrationDays": 30
+    },
+    {
+      "name": "약품2",
+      "price": 2000,
+      "dosage": "1회 1정",
+      "administrationTimes": 3,
+      "administrationDays": 30
+    }
+  ],
+  "costStructure": [
+    {
+      "name": "약값",
+      "amount": 3000
+    },
+    {
+      "name": "조제료",
+      "amount": 1000
+    },
+    {
+      "name": "기타",
+      "amount": 1000
+    }
+  ],
+  "businessNumber": "123-45-67890",
+  "businessName": "약국명",
+  "purchaseDate": "2021-09-01T00:00:00",
+  "totalAmount": 5000
+}
